@@ -28,7 +28,7 @@ func main() {
 	c.SetRequestTimeout(120 * time.Second)
 
 	character := make([]SpongebobEpisodes, 0)
-
+	//create callback for links
 	c.OnHTML("table.general", func(e *colly.HTMLElement) {
 		e.ForEach("tr.general-header", func(_ int, e *colly.HTMLElement) {
 			newCharacter := SpongebobEpisodes{}
@@ -51,6 +51,7 @@ func main() {
 		fmt.Println("Received error:", e)
 	})
 
+	// start scraping
 	c.Visit("https://spongebob.fandom.com/wiki/List_of_episodes")
 
 	createJson(character)
